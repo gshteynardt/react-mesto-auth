@@ -11,6 +11,7 @@
 @import url(__caption/popup__caption.css);
 @import url(__error/popup__error.css);
 @import url(__error/_visible/popup__error_visible.css);
+@import url(__content/popup__content.css);
 
 .popup {
   font-family: 'Inter', Arial, sans-serif;
@@ -27,4 +28,8 @@
   align-items: center;
   justify-content: center;
 }
+
+
+
+
 
