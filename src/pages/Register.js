@@ -44,8 +44,9 @@ const Register = () => {
 
   return(
     <div className="page">
-      <Header/>
-      <d>
+      <Header>
+        <Link to={'/signin'} className="link link_theme_header">Войти</Link>
+      </Header>
       <Form
         title="Регистрация"
         submitText="Зарегистрироваться"
@@ -71,7 +72,6 @@ const Register = () => {
           onChange={handleChange}
         />
       </Form>
-      </d>
       <Footer/>
     </div>
   )

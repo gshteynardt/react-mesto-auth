@@ -13,8 +13,11 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { InitialCards } from "../contexts/initialCards";
 import {TextForSubmitBtn, textForSubmitBtn} from "../contexts/TextForSubmitBtn";
 import { AddPlacePopup } from "../components/AddPlacePopup";
+import { token } from "../utils/token";
+import {useHistory} from "react-router";
 
-const MainPage = () => {
+
+const MainPage = ({userData}) => {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -24,6 +27,7 @@ const MainPage = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -52,6 +56,11 @@ const MainPage = () => {
     setIsDeleteCardPopupOpen(false);
     setIsImgPopupOpen(false);
     setSelectedCard(null);
+  }
+
+  const signOut = () => {
+    token.remove('mesto')
+    history.push('./signin');
   }
 
   useEffect(() => {
@@ -131,7 +140,15 @@ const MainPage = () => {
     <InitialCards.Provider value={cards}>
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
-          <Header />
+          <Header>
+            <div>
+              <span className="mail">{userData.email}</span>
+              <button
+                className="button link link_theme_header"
+                onClick={signOut}
+              >Выйти</button>
+            </div>
+          </Header>
           {isLoading ?
             <Preloader /> :
             <Main
@@ -182,4 +199,5 @@ const MainPage = () => {
     </InitialCards.Provider>
   );
 }
-export default MainPage;
+
+export default MainPage
