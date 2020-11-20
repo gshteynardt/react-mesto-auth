@@ -1,6 +1,6 @@
 import React from "react";
 
-const Form = ({title, submitText, children, onSubmit}) => {
+const Form = ({title, submitText, children, onSubmit, link}) => {
 
   return(
     <div className={'form__container'}>
@@ -20,6 +20,7 @@ const Form = ({title, submitText, children, onSubmit}) => {
         { submitText }
       </button>
     </form>
+      { link }
     </div>
   )
 }

@@ -1,6 +1,6 @@
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
-const register = (email, password) => {
+export const register = (email, password) => {
       return fetch(`${BASE_URL}/signup`, {
           method: "POST",
           headers: {
@@ -9,7 +9,18 @@ const register = (email, password) => {
           },
           body: JSON.stringify({email, password})
         })
-        .then(res => res.json);
+        .then(res => {
+          try {
+            if(res.status === 201) {
+              return res.json();
+            }
+          } catch (err) {
+              return err
+          }
+        })
+        .then(res => {
+          return res
+        })
+        .catch(err => console.log(err));
 }
 
-export default register;

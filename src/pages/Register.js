@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom';
 import Header from "../components/Header";
 import Form from "../components/Form";
 import Input from "../components/Input";
 import Footer from "../components/Footer";
-import register from "../utils/auth";
+import * as auth from "../utils/auth";
 
 const Register = () => {
   const history = useHistory();
@@ -12,6 +12,7 @@ const Register = () => {
     email: '',
     password: '',
   })
+  const link = <Link className="link form__link link_theme_form" to="/signin">Уже зарегистрированы? Войти</Link>;
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -28,25 +29,28 @@ const Register = () => {
     }
     try {
       const { email, password } = userData;
-      const res = await register(email, password);
+      const res = await auth.register(email, password);
       if(res.data) {
         setUserData({
           email: '',
           password: '',
         })
-        history.push("/singin")
+        history.push("/signin")
       }
     } catch (err) {
+      console.log({message: `Что-то пошло не так`}, err)
     }
   }
 
   return(
     <div className="page">
       <Header/>
+      <d>
       <Form
         title="Регистрация"
         submitText="Зарегистрироваться"
         onSubmit={handleSubmit}
+        link={link}
       >
         <Input
           name="email"
@@ -67,7 +71,7 @@ const Register = () => {
           onChange={handleChange}
         />
       </Form>
-      <Link className="link form__link" to="/signin">Уже зарегистрированы? Войти</Link>
+      </d>
       <Footer/>
     </div>
   )
