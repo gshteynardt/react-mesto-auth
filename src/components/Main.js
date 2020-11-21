@@ -1,15 +1,17 @@
-import React from "react";
+import React from 'react';
 import Card from './Card';
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { InitialCards }  from "../contexts/initialCards";
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { InitialCards } from '../contexts/initialCards';
 
-const Main = ({onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onPopupDeleteCard, onPopupImg }) =>  {
+const Main = ({
+  onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike, onPopupDeleteCard, onPopupImg,
+}) => {
   const currentUser = React.useContext(CurrentUserContext);
   const cards = React.useContext(InitialCards);
 
-  const {avatar, about, name, } = currentUser;
+  const { avatar, about, name } = currentUser;
 
-  return(
+  return (
     <>
       <main className="page__content">
         <section className="profile page__profile">
@@ -34,8 +36,7 @@ const Main = ({onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike,
         <section className="elements">
           <ul className="elements__items">
             {
-              cards.map(card =>
-                  <Card
+              cards.map((card) => <Card
                   card={card}
                   key={card._id}
                   onCardClick={onCardClick}
@@ -50,6 +51,6 @@ const Main = ({onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike,
 
     </>
   );
-}
+};
 
 export default Main;

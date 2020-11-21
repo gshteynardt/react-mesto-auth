@@ -1,7 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const Preloader = () => {
-  return (
+const Preloader = () => (
       <div className="lds-default">
         <div></div>
         <div></div>
@@ -16,7 +15,6 @@ const Preloader = () => {
         <div></div>
         <div></div>
       </div>
-  );
-}
+);
 
 export default Preloader;

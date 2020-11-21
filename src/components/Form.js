@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-const Form = ({title, submitText, children, onSubmit, link}) => {
-
-  return(
+const Form = ({
+  title, submitText, children, onSubmit, link,
+}) => (
     <div className={'form__container'}>
       <form
         className="form"
@@ -22,7 +22,6 @@ const Form = ({title, submitText, children, onSubmit, link}) => {
       </form>
       { link }
     </div>
-  )
-}
+);
 
-export default Form
+export default Form;

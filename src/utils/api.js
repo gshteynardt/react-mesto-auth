@@ -1,5 +1,5 @@
 class Api {
-  constructor({ baseUrl, headers}) {
+  constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
   }
@@ -7,22 +7,22 @@ class Api {
   _handleOriginal(res) {
     if (!res.ok) {
       return Promise.reject(`Error: ${res.status}`);
-  }
+    }
     return res.json();
   }
 
   _getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers
+      headers: this._headers,
     })
-      .then(res => this._handleOriginal(res));
+      .then((res) => this._handleOriginal(res));
   }
 
   _getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers
+      headers: this._headers,
     })
-      .then(res => this._handleOriginal(res))
+      .then((res) => this._handleOriginal(res));
   }
 
   getAppInfo() {
@@ -35,10 +35,10 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
-        link: data.link
-      })
+        link: data.link,
+      }),
     })
-      .then(res => this._handleOriginal(res));
+      .then((res) => this._handleOriginal(res));
   }
 
   deleteCard(CardId) {
@@ -46,7 +46,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-      .then(res => this._handleOriginal(res));
+      .then((res) => this._handleOriginal(res));
   }
 
   editUserInfo(data) {
@@ -55,10 +55,10 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
-        about: data.about
-      })
+        about: data.about,
+      }),
     })
-      .then(res => this._handleOriginal(res));
+      .then((res) => this._handleOriginal(res));
   }
 
   changeUserPicture(avatar) {
@@ -66,17 +66,17 @@ class Api {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify(avatar)
+      body: JSON.stringify(avatar),
     })
-      .then(res => this._handleOriginal(res));
+      .then((res) => this._handleOriginal(res));
   }
 
   changeLikeCardStatus(cardID, isLiked) {
     return fetch(`${this._baseUrl}/cards/likes/${cardID}`, {
       method: isLiked ? 'PUT' : 'DELETE',
-      headers: this._headers
+      headers: this._headers,
     })
-      .then(res => this._handleOriginal(res));
+      .then((res) => this._handleOriginal(res));
   }
 
   // deleteLikeCard(cardID) {
@@ -86,15 +86,14 @@ class Api {
   //   })
   //     .then(res => this._handleOriginal(res));
   // }
-
 }
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
   headers: {
     authorization: 'c543d785-697b-4b19-aa15-a606529eab61',
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 });
 
 export default api;

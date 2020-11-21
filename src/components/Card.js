@@ -1,40 +1,40 @@
-import React from "react";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import React from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
+const Card = ({
+  card, onCardClick, onCardLike, onPopupDeleteCard, onPopupImg,
+}) => {
+  const {
+    link, name, likes, ownerId,
+  } = card;
 
-const Card = ({card, onCardClick, onCardLike, onPopupDeleteCard, onPopupImg}) => {
-
-  const {link, name, likes, ownerId} = card;
-
-  //определяем владельца карточки
+  // определяем владельца карточки
   const currentUser = React.useContext(CurrentUserContext);
   const isOwn = ownerId === currentUser._id;
 
-  //создаем className для кнопки удаления
+  // создаем className для кнопки удаления
   const cardDeleteButtonClassName = (
     `button ${isOwn ? 'elements__delete-button_visible' : 'elements__delete-button_hidden'}`
   );
 
-  //проверяем лайк, поставленный текущим пользователем
-  const isLiked = likes.some(i => i._id === currentUser._id);
-  //создаем className для кнопки like
-  const cardLikeButtonClassName = isLiked ? "button button__like button__like_active" : "button button__like";
+  // проверяем лайк, поставленный текущим пользователем
+  const isLiked = likes.some((i) => i._id === currentUser._id);
+  // создаем className для кнопки like
+  const cardLikeButtonClassName = isLiked ? 'button button__like button__like_active' : 'button button__like';
 
   const handleCardClick = () => {
     onPopupImg();
     onCardClick(card);
-  }
+  };
 
   const handleLikeClick = () => {
     onCardLike(card);
-  }
+  };
 
   const handleDeleteClick = () => {
     onPopupDeleteCard();
     onCardClick(card);
-  }
-
-
+  };
 
   return <>
     <li className="elements__item">
@@ -54,7 +54,7 @@ const Card = ({card, onCardClick, onCardLike, onPopupDeleteCard, onPopupImg}) =>
         </div>
       </div>
     </li>
-  </>
-}
+  </>;
+};
 
 export default Card;

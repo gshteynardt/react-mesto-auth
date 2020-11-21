@@ -1,15 +1,17 @@
-import React, {useContext} from "react";
-import PopupWithForm from './PopupWithForm'
-import { TextForSubmitBtn } from "../contexts/TextForSubmitBtn";
-import Popup from "./Popup";
+import React, { useContext } from 'react';
+import PopupWithForm from './PopupWithForm';
+import { TextForSubmitBtn } from '../contexts/TextForSubmitBtn';
+import Popup from './Popup';
 
-export const PopupDeleteCard = ({card, isOpen, onClose, onCardDelete}) => {
+export const PopupDeleteCard = ({
+  card, isOpen, onClose, onCardDelete,
+}) => {
   const textForSubmitBtn = useContext(TextForSubmitBtn);
 
   const handleDeleteClick = (e) => {
     e.preventDefault();
     onCardDelete(card);
-  }
+  };
 
   return (
     <Popup
@@ -28,4 +30,4 @@ export const PopupDeleteCard = ({card, isOpen, onClose, onCardDelete}) => {
       </PopupWithForm>
     </Popup>
   );
-}
+};

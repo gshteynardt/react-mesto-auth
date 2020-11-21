@@ -1,13 +1,13 @@
-import PopupWithForm from './PopupWithForm'
-import React, {useContext, useRef} from "react";
-import {TextForSubmitBtn} from "../contexts/TextForSubmitBtn";
-import Popup from "./Popup";
+import React, { useContext, useRef } from 'react';
+import PopupWithForm from './PopupWithForm';
+import { TextForSubmitBtn } from '../contexts/TextForSubmitBtn';
+import Popup from './Popup';
 
-export const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
+const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
   const nameRef = useRef();
   const linkRef = useRef();
   const textForSubmitBtn = useContext(TextForSubmitBtn);
-  //обработчик события submit
+  // обработчик события submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -15,9 +15,9 @@ export const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
       name: nameRef.current.value,
       link: linkRef.current.value,
     });
-  }
+  };
 
-  return(
+  return (
     <Popup
       name="elements"
       isOpen={isOpen}
@@ -54,4 +54,6 @@ export const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
       </PopupWithForm>
     </Popup>
   );
-}
+};
+
+export default AddPlacePopup

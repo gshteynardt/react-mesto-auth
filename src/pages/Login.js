@@ -1,55 +1,55 @@
-import React, {useState} from "react";
-import Header from "../components/Header";
-import Form from "../components/Form";
-import Input from "../components/Input";
-import Footer from "../components/Footer";
-import * as auth from "../utils/auth";
-import {token} from "../utils/token";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+import Form from '../components/Form';
+import Input from '../components/Input';
+import Footer from '../components/Footer';
+import * as auth from '../utils/auth';
+import { token } from '../utils/token';
 
-const Login = ({onLogin}) => {
+const Login = ({ onLogin }) => {
   const [userData, setUserData] = useState({
     email: '',
     password: '',
-  })
+  });
 
-  const handleChange = evt => {
+  const handleChange = (evt) => {
     const { name, value } = evt.target;
     setUserData({
       ...userData,
       [name]: value,
-    })
-  }
+    });
+  };
 
-  const handleSubmit = async evt => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    if(!userData.email || !userData.password) {
-      return
+    if (!userData.email || !userData.password) {
+      return;
     }
     try {
       const { email, password } = userData;
       const data = await auth.login(email, password);
 
-      if(data.token) {
+      if (data.token) {
         token.set('mesto', data.token);
         onLogin();
-        return data
-      } else if(data.message) {
-        console.log({message: `${data.message}`})
+        return data;
+      } if (data.message) {
+        console.log({ message: `${data.message}` });
       }
     } catch (err) {
-      console.log({message: `Что-то пошло не так`}, err)
+      console.log({ message: 'Что-то пошло не так' }, err);
     }
-  }
+  };
 
-  return(
+  return (
   <div className="page">
     <Header>
       <Link to={'/signup'} className="link link_theme_header">Регистрация</Link>
     </Header>
     <Form
-      title={"Вход"}
-      submitText={"Войти"}
+      title={'Вход'}
+      submitText={'Войти'}
       onSubmit={handleSubmit}
     >
       <Input
@@ -72,7 +72,7 @@ const Login = ({onLogin}) => {
     </Form>
     <Footer/>
   </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

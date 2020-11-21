@@ -1,12 +1,10 @@
-import React from "react";
+import React from 'react';
 
-const Input = ({name, theme, ...rest}) => {
-  return(
+const Input = ({ name, theme, ...rest }) => (
     <input
       name={name}
       { ...rest }
     />
-  )
-}
+);
 
-export default Input
+export default Input;

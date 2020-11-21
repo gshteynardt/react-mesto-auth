@@ -1,21 +1,20 @@
-import PopupWithForm from './PopupWithForm'
-import React, {useContext, useRef} from "react";
-import { TextForSubmitBtn } from "../contexts/TextForSubmitBtn";
-import Popup from "./Popup";
+import React, { useContext, useRef } from 'react';
+import PopupWithForm from './PopupWithForm';
+import { TextForSubmitBtn } from '../contexts/TextForSubmitBtn';
+import Popup from './Popup';
 
-export const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar}) => {
-
+export const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
   const avatarRef = useRef();
   const textForSubmitBtn = useContext(TextForSubmitBtn);
-  
-  //обработчик события submit
+
+  // обработчик события submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
     onUpdateAvatar({
       avatar: avatarRef.current.value,
     });
-  }
+  };
 
   return (
    <Popup
@@ -42,4 +41,4 @@ export const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar}) => {
      </PopupWithForm>
    </Popup>
   );
-}
+};
