@@ -24,7 +24,7 @@ const App = () => {
     try {
       const jwt = token.get('mesto');
       if (jwt) {
-        const res = await auth.checkToken(jwt).catch((err) => err);
+        const res = await auth.checkToken(jwt);
         if (res.data) {
           setUserData(res.data);
           setLoggedIn(true);
@@ -82,7 +82,11 @@ const App = () => {
           <Redirect to="/" />
         </Route>
       </Switch>
-      <InfoTooltip isSuccess={isSuccess} isOpen={isOpen} onClose={closeInfoPopup}/>
+      <InfoTooltip
+        isSuccess={isSuccess}
+        isOpen={isOpen}
+        onClose={closeInfoPopup}
+      />
     </>
   );
 };

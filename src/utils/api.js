@@ -79,13 +79,6 @@ class Api {
       .then((res) => this._handleOriginal(res));
   }
 
-  // deleteLikeCard(cardID) {
-  //   return fetch(`${this._baseUrl}/cards/likes/${cardID}`, {
-  //     method: 'DELETE',
-  //     headers: this._headers
-  //   })
-  //     .then(res => this._handleOriginal(res));
-  // }
 }
 
 const api = new Api({
