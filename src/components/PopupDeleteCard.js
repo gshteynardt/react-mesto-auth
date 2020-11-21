@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import PopupWithForm from './PopupWithForm'
 import { TextForSubmitBtn } from "../contexts/TextForSubmitBtn";
+import Popup from "./Popup";
 
 export const PopupDeleteCard = ({card, isOpen, onClose, onCardDelete}) => {
   const textForSubmitBtn = useContext(TextForSubmitBtn);
@@ -11,17 +12,20 @@ export const PopupDeleteCard = ({card, isOpen, onClose, onCardDelete}) => {
   }
 
   return (
-    <PopupWithForm
+    <Popup
       name="card-delete popup__title_theme_card-delete"
-      title="Вы уверены?"
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={handleDeleteClick}
-      textSubmitBtn={textForSubmitBtn.confirm}
     >
-      <label className="popup__field">
-        <span className="popup__error"></span>
-      </label>
-    </PopupWithForm>
+      <PopupWithForm
+        title="Вы уверены?"
+        onSubmit={handleDeleteClick}
+        textSubmitBtn={textForSubmitBtn.confirm}
+      >
+        <label className="popup__field">
+          <span className="popup__error"></span>
+        </label>
+      </PopupWithForm>
+    </Popup>
   );
 }

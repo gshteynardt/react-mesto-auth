@@ -1,6 +1,7 @@
 import PopupWithForm from './PopupWithForm'
 import React, {useContext, useRef} from "react";
 import { TextForSubmitBtn } from "../contexts/TextForSubmitBtn";
+import Popup from "./Popup";
 
 export const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar}) => {
 
@@ -17,24 +18,28 @@ export const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar}) => {
   }
 
   return (
-    <PopupWithForm
-      name="avatar"
-      title="Обновить аватар"
-      isOpen={isOpen}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-      textSubmitBtn={textForSubmitBtn.save}
-    >
-      <label className="popup__field">*/}
-        <input
-          ref={avatarRef}
-          type="url"
-          className="popup__input popup__input_type_link"
-          name="link"
-          placeholder="Ссылка на картинку"
-          required />
-        <span className="popup__error"></span>
-      </label>
-    </PopupWithForm>
+   <Popup
+     name="avatar"
+     isOpen={isOpen}
+     onClose={onClose}
+   >
+     <PopupWithForm
+       name="avatar"
+       title="Обновить аватар"
+       onSubmit={handleSubmit}
+       textSubmitBtn={textForSubmitBtn.save}
+     >
+       <label className="popup__field">
+         <input
+           ref={avatarRef}
+           type="url"
+           className="popup__input popup__input_type_link"
+           name="link"
+           placeholder="Ссылка на картинку"
+           required />
+         <span className="popup__error"></span>
+       </label>
+     </PopupWithForm>
+   </Popup>
   );
 }

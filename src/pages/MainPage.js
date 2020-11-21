@@ -6,13 +6,13 @@ import Preloader from '../components/Preloader';
 import { EditProfilePopup } from '../components/EditProfilePopup';
 import { EditAvatarPopup } from '../components/EditAvatarPopup';
 import { PopupDeleteCard} from '../components/PopupDeleteCard';
+import { AddPlacePopup } from "../components/AddPlacePopup";
 import ImagePopup from '../components/ImagePopup';
 import api from '../utils/api.js';
 import { transformCard } from "../utils/transformCard";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { InitialCards } from "../contexts/initialCards";
 import {TextForSubmitBtn, textForSubmitBtn} from "../contexts/TextForSubmitBtn";
-import { AddPlacePopup } from "../components/AddPlacePopup";
 import { token } from "../utils/token";
 import {useHistory} from "react-router";
 
