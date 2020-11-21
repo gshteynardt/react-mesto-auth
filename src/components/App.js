@@ -30,19 +30,16 @@ const App = () => {
           setLoggedIn(true);
           history.push('/cards');
         } else if (res.message) {
-          offSuccessPopup();
           console.log({ message: `${res.message}` });
         }
       }
     } catch (err) {
-      offSuccessPopup();
       console.log({ message: 'Что-то пошло не так' }, err);
     }
   };
 
   const onLogin = () => {
     tokenCheck();
-    onSuccessPopup();
   };
 
   // закрытие popup
@@ -50,24 +47,30 @@ const App = () => {
     setIsOpen(false);
   };
 
-  const onSuccessPopup = () => {
+  const onSuccessPopup = (boolean) => {
     setIsOpen(true);
-    setIsSuccess(true);
+    setIsSuccess(boolean);
   };
 
-  const offSuccessPopup = () => {
+  const offSuccessPopup = (boolean) => {
     setIsOpen(true);
-    setIsSuccess(false);
+    setIsSuccess(boolean);
   };
 
   return (
     <>
       <Switch>
-        <ProtectedRoute path="/cards" loggedIn={loggedIn}>
+        <ProtectedRoute
+          path="/cards"
+          loggedIn={loggedIn}
+        >
           <MainPage userData={userData}/>
         </ProtectedRoute>
         <Route path="/signup">
-          <Register isSuccess={isSuccess}/>
+          <Register
+            isSuccess={onSuccessPopup}
+            unSuccess={offSuccessPopup}
+          />
         </Route>
         <Route path="/signin">
           <Login onLogin={onLogin}/>

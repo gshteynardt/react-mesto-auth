@@ -37,7 +37,8 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
             placeholder="Название"
             minLength="1"
             maxLength="30"
-            required />
+            required
+          />
           <span className="popup__error"></span>
         </label>
 
@@ -48,7 +49,8 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
             className="popup__input popup__input_type_link"
             name="link"
             placeholder="Ссылка на картинку"
-            required />
+            required
+          />
           <span className="popup__error"></span>
         </label>
       </PopupWithForm>

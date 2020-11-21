@@ -6,7 +6,7 @@ import Input from '../components/Input';
 import Footer from '../components/Footer';
 import * as auth from '../utils/auth';
 
-const Register = ({}) => {
+const Register = ({isSuccess, unSuccess}) => {
   const history = useHistory();
   const [userData, setUserData] = useState({
     email: '',
@@ -37,11 +37,14 @@ const Register = ({}) => {
           email: '',
           password: '',
         });
+        isSuccess(true)
         return history.push('/signin');
       } if (res.error) {
+        unSuccess(false)
         console.log({ message: `${res.error}` });
       }
     } catch (err) {
+      unSuccess(false)
       console.log({ message: 'Что-то пошло не так' }, err);
     }
   };
