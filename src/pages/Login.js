@@ -23,7 +23,7 @@ const Login = ({ onLogin }) => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    if (!userData.email || !userData.password) {
+    if (!(userData.email || !userData.password)) {
       return;
     }
     try {

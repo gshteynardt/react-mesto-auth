@@ -25,7 +25,7 @@ const Register = ({isSuccess, unSuccess}) => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    if (!userData.password && userData.email) {
+    if (!(userData.password && userData.email)) {
       return;
     }
     try {
