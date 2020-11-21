@@ -30,12 +30,15 @@ const Register = () => {
     try {
       const { email, password } = userData;
       const res = await auth.register(email, password);
+
       if(res.data) {
         setUserData({
           email: '',
           password: '',
         })
-        history.push("/signin")
+        return history.push("/signin")
+      } else if(res.error) {
+        console.log({message: `${res.error}`})
       }
     } catch (err) {
       console.log({message: `Что-то пошло не так`}, err)

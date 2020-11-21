@@ -34,6 +34,8 @@ const Login = ({onLogin}) => {
         token.set('mesto', data.token);
         onLogin();
         return data
+      } else if(data.message) {
+        console.log({message: `${data.message}`})
       }
     } catch (err) {
       console.log({message: `Что-то пошло не так`}, err)

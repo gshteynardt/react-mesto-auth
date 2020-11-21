@@ -21,12 +21,12 @@ const App = () => {
   const tokenCheck = async () => {
     try {
       const jwt = token.get('mesto');
-      if (jwt) {
-        const res = await auth.checkToken(jwt);
-        setUserData(res.data);
-        setLoggedIn(true);
-        history.push("/cards");
-      }
+        if (jwt) {
+          const res = await auth.checkToken(jwt).catch(err => err);
+          setUserData(res.data);
+          setLoggedIn(true);
+          history.push("/cards");
+        }
       } catch(err) {
       console.log({message: `Что-то пошло не так`}, err)
     }

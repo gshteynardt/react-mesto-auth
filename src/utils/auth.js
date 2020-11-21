@@ -9,17 +9,8 @@ export const register = (email, password) => {
     },
     body: JSON.stringify({email, password})
   })
-  .then(res => {
-    try {
-      if(res.status === 201) {
-        return res.json();
-      }
-    } catch (err) {
-        return err
-    }
-  })
-  .then(res => res)
-  .catch(err => console.log(err));
+    .then(res => res.json())
+    .catch(err => err);
 }
 
 export const login = (email, password) => {
@@ -32,7 +23,7 @@ export const login = (email, password) => {
     body: JSON.stringify({ email, password })
   })
     .then(res => res.json())
-    .catch(err => console.log(err));
+    .catch(err => err);
 }
 
 export const checkToken = (token) => {
@@ -45,5 +36,5 @@ export const checkToken = (token) => {
     }
   })
     .then(res => res.json())
-    .catch(err => console.log(err));
+    .catch(err => err);
 }
