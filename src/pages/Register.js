@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Form from '../components/Form';
 import Input from '../components/Input';
 import Footer from '../components/Footer';
-import * as auth from '../utils/auth';
 
-const Register = ({isSuccess, unSuccess}) => {
-  const history = useHistory();
+const Register = ({onRegister}) => {
   const [userData, setUserData] = useState({
     email: '',
     password: '',
@@ -28,25 +26,8 @@ const Register = ({isSuccess, unSuccess}) => {
     if (!(userData.password && userData.email)) {
       return;
     }
-    try {
-      const { email, password } = userData;
-      const res = await auth.register(email, password);
-
-      if (res.data) {
-        setUserData({
-          email: '',
-          password: '',
-        });
-        isSuccess(true)
-        return history.push('/signin');
-      } if (res.error) {
-        unSuccess(false)
-        console.log({ message: `${res.error}` });
-      }
-    } catch (err) {
-      unSuccess(false)
-      console.log({ message: 'Что-то пошло не так' }, err);
-    }
+    const { email, password } = userData;
+    return await onRegister(email, password);
   };
 
   return (

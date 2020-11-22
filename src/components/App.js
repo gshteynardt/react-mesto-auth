@@ -20,6 +20,20 @@ const App = () => {
     tokenCheck();
   }, []);
 
+  const closeInfoPopup = () => {
+    setIsOpen(false);
+  };
+
+  const onSuccessPopup = (boolean) => {
+    setIsOpen(true);
+    setIsSuccess(boolean);
+  };
+
+  const offSuccessPopup = (boolean) => {
+    setIsOpen(true);
+    setIsSuccess(boolean);
+  };
+
   const tokenCheck = async () => {
     try {
       const jwt = token.get('mesto');
@@ -53,19 +67,25 @@ const App = () => {
     }
   };
 
-  // закрытие popup
-  const closeInfoPopup = () => {
-    setIsOpen(false);
-  };
+  const handleRegister = async (email, password) => {
+    try {
+      const res = await auth.register(email, password);
 
-  const onSuccessPopup = (boolean) => {
-    setIsOpen(true);
-    setIsSuccess(boolean);
-  };
-
-  const offSuccessPopup = (boolean) => {
-    setIsOpen(true);
-    setIsSuccess(boolean);
+      if (res.data) {
+        setUserData({
+          email: '',
+          password: '',
+        });
+        onSuccessPopup(true)
+        return history.push('/signin');
+      } if (res.error) {
+        offSuccessPopup(false)
+        console.log({ message: `${res.error}` });
+      }
+    } catch (err) {
+      offSuccessPopup(false)
+      console.log({ message: 'Что-то пошло не так' }, err);
+    }
   };
 
   return (
@@ -79,8 +99,7 @@ const App = () => {
         </ProtectedRoute>
         <Route path="/signup">
           <Register
-            isSuccess={onSuccessPopup}
-            unSuccess={offSuccessPopup}
+            onRegister={handleRegister}
           />
         </Route>
         <Route path="/signin">
