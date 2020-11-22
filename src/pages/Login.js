@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import Header from '../components/Header';
 import Form from '../components/Form';
 import Input from '../components/Input';
 import Footer from '../components/Footer';
-import * as auth from '../utils/auth';
-import { token } from '../utils/token';
 
-const Login = ({ onLogin }) => {
+const Login = ({onLogin}) => {
   const [userData, setUserData] = useState({
     email: '',
     password: '',
@@ -26,20 +24,8 @@ const Login = ({ onLogin }) => {
     if (!(userData.email || !userData.password)) {
       return;
     }
-    try {
-      const { email, password } = userData;
-      const data = await auth.login(email, password);
-
-      if (data.token) {
-        token.set('mesto', data.token);
-        onLogin();
-        return data;
-      } if (data.message) {
-        console.log({ message: `${data.message}` });
-      }
-    } catch (err) {
-      console.log({ message: 'Что-то пошло не так' }, err);
-    }
+    const { email, password } = userData;
+    return await onLogin(email, password)
   };
 
   return (

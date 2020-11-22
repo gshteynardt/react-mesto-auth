@@ -38,8 +38,19 @@ const App = () => {
     }
   };
 
-  const onLogin = () => {
-    tokenCheck();
+  const handleLogin = async (email, password) => {
+    try {
+      const data = await auth.login(email, password);
+      if (data.token) {
+        token.set('mesto', data.token);
+        await tokenCheck();
+        return data;
+      } if (data.message) {
+        console.log({ message: `${data.message}` });
+      }
+    } catch (err) {
+      console.log({ message: 'Что-то пошло не так' }, err);
+    }
   };
 
   // закрытие popup
@@ -73,7 +84,7 @@ const App = () => {
           />
         </Route>
         <Route path="/signin">
-          <Login onLogin={onLogin}/>
+          <Login onLogin={handleLogin}/>
         </Route>
         <Route exact path="/">
           {loggedIn ? <Redirect to="/cars"/> : <Redirect to="signin"/>}
