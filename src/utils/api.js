@@ -1,3 +1,5 @@
+import {token} from "./token";
+
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -11,16 +13,25 @@ class Api {
     return res.json();
   }
 
+  getHeaders(name) {
+    const current_token = token.get(name);
+
+    return {
+      ...this._headers,
+      'Authorization': `Bearer ${current_token}`,
+    }
+  }
+
   _getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
+      headers: this.getHeaders('mesto'),
     })
       .then((res) => this._handleOriginal(res));
   }
 
   _getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
+      headers: this.getHeaders('mesto'),
     })
       .then((res) => this._handleOriginal(res));
   }
@@ -32,7 +43,7 @@ class Api {
   createCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: this.getHeaders('mesto'),
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -44,7 +55,7 @@ class Api {
   deleteCard(CardId) {
     return fetch(`${this._baseUrl}/cards/${CardId}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: this.getHeaders('mesto'),
     })
       .then((res) => this._handleOriginal(res));
   }
@@ -52,7 +63,7 @@ class Api {
   editUserInfo(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this.getHeaders('mesto'),
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -62,29 +73,26 @@ class Api {
   }
 
   changeUserPicture(avatar) {
-    console.log(avatar);
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: this.getHeaders('mesto'),
       body: JSON.stringify(avatar),
     })
       .then((res) => this._handleOriginal(res));
   }
 
-  changeLikeCardStatus(cardID, isLiked) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardID}`, {
+  changeLikeCardStatus(cardId, isLiked) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: isLiked ? 'PUT' : 'DELETE',
-      headers: this._headers,
+      headers: this.getHeaders('mesto'),
     })
       .then((res) => this._handleOriginal(res));
   }
-
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-14',
+  baseUrl: `http://localhost:3000`,
   headers: {
-    authorization: 'c543d785-697b-4b19-aa15-a606529eab61',
     'Content-Type': 'application/json',
   },
 });

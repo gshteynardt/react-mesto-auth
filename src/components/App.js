@@ -17,7 +17,7 @@ const App = () => {
   const history = useHistory();
 
   useEffect(() => {
-    tokenCheck();
+    tokenCheck()
   }, []);
 
   const closeInfoPopup = () => {
@@ -39,8 +39,8 @@ const App = () => {
       const jwt = token.get('mesto');
       if (jwt) {
         const res = await auth.checkToken(jwt);
-        if (res.data) {
-          setUserData(res.data);
+        if (res) {
+          setUserData(res);
           setLoggedIn(true);
           history.push('/cards');
         } else if (res.message) {

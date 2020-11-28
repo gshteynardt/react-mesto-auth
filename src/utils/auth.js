@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'http://localhost:3000';
 
 const handleResponse = (res) => {
   if (!res.ok) {
@@ -10,7 +10,7 @@ const handleResponse = (res) => {
 export const register = (email, password) => fetch(`${BASE_URL}/signup`, {
   method: 'POST',
   headers: {
-    Accept: 'application/json',
+    'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ email, password }),

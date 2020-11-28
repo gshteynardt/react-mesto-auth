@@ -4,21 +4,21 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 const Card = ({
   card, onCardClick, onCardLike, onPopupDeleteCard, onPopupImg,
 }) => {
+
   const {
-    link, name, likes, ownerId,
+    link, name, likes, owner,
   } = card;
 
   // определяем владельца карточки
   const currentUser = React.useContext(CurrentUserContext);
-  const isOwn = ownerId === currentUser._id;
-
+  const isOwn = owner === currentUser._id;
   // создаем className для кнопки удаления
   const cardDeleteButtonClassName = (
     `button ${isOwn ? 'elements__delete-button_visible' : 'elements__delete-button_hidden'}`
   );
 
   // проверяем лайк, поставленный текущим пользователем
-  const isLiked = likes.some((i) => i._id === currentUser._id);
+  const isLiked = likes.some((i) => i === currentUser._id);
   // создаем className для кнопки like
   const cardLikeButtonClassName = isLiked ? 'button button__like button__like_active' : 'button button__like';
 

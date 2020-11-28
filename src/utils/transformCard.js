@@ -3,5 +3,5 @@ export const transformCard = (newCard) => ({
   likes: newCard.likes,
   name: newCard.name,
   _id: newCard._id,
-  ownerId: newCard.owner._id,
+  owner: newCard.owner,
 });
